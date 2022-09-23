@@ -8,29 +8,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
     return MaterialApp(
-      title: 'Welcome to Flutter',
-      // 测试数据
-      // home: Scaffold(
-      //   appBar: AppBar(
-      //     title: const Text("Welcome to Flutter Title"),
-      //   ),
-      //   body: const Center(
-      //     // 直接显示
-      //     // child: Text(
-      //     //     // 'Hello World'
-      //     //     wordPair.asPascalCase),
-      //     child: RandomWordsWidget(),
-      //   ),
-      // ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Welcome to Flutter Title"),
-        ),
-        body: RandomWordsWidget(),
-      ),
-    );
+        title: 'Startup Name Generator',
+        // 测试数据
+        // home: Scaffold(
+        //   appBar: AppBar(
+        //     title: const Text("Welcome to Flutter Title"),
+        //   ),
+        //   body: const Center(
+        //     // 直接显示
+        //     // child: Text(
+        //     //     // 'Hello World'
+        //     //     wordPair.asPascalCase),
+        //     child: RandomWordsWidget(),
+        //   ),
+        // ),
+        theme: ThemeData(primaryColor: Colors.red),
+        home: RandomWordsWidget());
   }
 }
 
@@ -60,8 +54,40 @@ class RandomWordState extends State<RandomWordsWidget> {
   //   return Text(wordPair.asPascalCase);
   // }
 
+  /// 这里将Scaffold写在这里，是为了方便导航的时候，获取已经保存的word数据
   @override
-  Widget build(BuildContext context) => buildSuggests();
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text("Welcome to Flutter Title"),
+          actions: [
+            IconButton(onPressed: onPushSaved, icon: const Icon(Icons.list))
+          ],
+        ),
+        body: buildSuggests(),
+      );
+
+  void onPushSaved() {
+    // 导航到下一个路由
+    ///新页面的内容在在MaterialPageRoute的builder属性中构建，builder是一个匿名函数。
+    /// 添加Navigator.push调用，这会使路由入栈（以后路由入栈均指推入到导航管理器的栈）
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      final tiles = saved.map((e) => ListTile(
+            title: Text(
+              e.asPascalCase,
+              style: biggerFont,
+            ),
+          ));
+      // 每行添加一个分割线
+      final divided =
+          ListTile.divideTiles(context: context, tiles: tiles).toList();
+      return Scaffold(
+        appBar: AppBar(title: const Text("Saved words")),
+        body: ListView(
+          children: divided,
+        ),
+      );
+    }));
+  }
 
   Widget buildSuggests() {
     return ListView.builder(
