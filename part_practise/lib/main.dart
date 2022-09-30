@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:part_practise/navigator/navigator_for_result_page.dart';
+import 'package:part_practise/navigator/navigator_named_routine.dart';
 import 'package:part_practise/state/state_manage_mix.dart';
 import 'package:part_practise/state/state_manage_parent.dart';
 import 'package:part_practise/state/state_manage_self.dart';
@@ -41,10 +43,11 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        children: const [_StateEnterWidget()],
+        children: const [_StateEnterWidget(), _NavigatorEntranceWidget()],
       );
 }
 
+/// 状态管理
 class _StateEnterWidget extends StatelessWidget {
   const _StateEnterWidget({super.key});
 
@@ -66,7 +69,7 @@ class _StateEnterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          const TitleWidget("State 管理"),
+          const TextTitleWidget("State 管理"),
           Row(
             children: [
               createEntrance(context, "父类管理状态", const MyAppStateInParent()),
@@ -78,15 +81,71 @@ class _StateEnterWidget extends StatelessWidget {
       );
 }
 
-class TitleWidget extends Text {
+/// 导航
+class _NavigatorEntranceWidget extends StatelessWidget {
+  const _NavigatorEntranceWidget();
+
+  @override
+  Widget build(BuildContext context) => Column(
+        children: [
+          const TextTitleWidget("Navigator"),
+          Row(
+            children: [
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "startForResult", const DetailsPage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, '命名路由', const NamedRoutePage()),
+            ],
+          )
+        ],
+      );
+}
+
+/// 标题文本
+class TextTitleWidget extends Text {
   /// https://stackoverflow.com/questions/55635663/invalid-constant-value-using-variable-as-parameter
   /// 这里在构造函数处不能申明const
   // const TitleWidget(data, {super.key})
   //      : super(data, style: TextStyle(color: Colors.black, fontSize: 18.0));
   /// 这样是可以的都得是const
-  const TitleWidget(data, {super.key})
+  const TextTitleWidget(data, {super.key})
       : super(data,
             style: const TextStyle(color: Colors.black, fontSize: 18.0));
+}
+
+/// 入口文本
+class TextEntranceWidget extends Text {
+  const TextEntranceWidget(super.data, {super.key})
+      : super(style: const TextStyle(color: Colors.blue, fontSize: 14.0));
+
+  /// 一个入口按钮，并等待结果
+  static createEntranceAndWait(
+      BuildContext context, String text, Widget route) {
+    return TextButton(
+        onPressed: () async {
+          var result = await Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+            return route;
+          }));
+          print("路由返回数据 $result");
+          if (null != result) {
+            /// https://stackoverflow.com/questions/72667782/undefined-name-mounted
+            /// The mounted property is only available in a StatefulWidget
+            /// 这里获取不到State，也就获取不到mounted字段
+            // if (!context.mounted) return;
+            /// 这里不建议使用BuildContext,因为在异步代码中，可能context以及销毁，但是暂时不知怎么处理
+            /// https://dart-lang.github.io/linter/lints/use_build_context_synchronously.html
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(result)));
+          }
+        },
+        child: Container(
+          decoration: BoxDecoration(border: Border.all(color: Colors.blue)),
+          padding: const EdgeInsetsDirectional.all(3.0),
+          margin: const EdgeInsetsDirectional.all(0),
+          child: TextEntranceWidget(text),
+        ));
+  }
 }
 
 // class MyHomePage extends StatefulWidget {
