@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:part_practise/exception/exception_main.dart';
 import 'package:part_practise/navigator/navigator_for_result_page.dart';
 import 'package:part_practise/navigator/navigator_named_routine.dart';
+import 'package:part_practise/res/res_main.dart';
 import 'package:part_practise/state/state_manage_mix.dart';
 import 'package:part_practise/state/state_manage_parent.dart';
 import 'package:part_practise/state/state_manage_self.dart';
@@ -82,7 +83,8 @@ class MyHomePage extends StatelessWidget {
         children: const [
           _StateEnterWidget(),
           _NavigatorEntranceWidget(),
-          ErrWidget()
+          ResourceWidget(),
+          ErrWidget(),
         ],
       );
 }
