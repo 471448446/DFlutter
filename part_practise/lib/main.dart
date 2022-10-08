@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:part_practise/navigator/navigator_for_result_page.dart';
 import 'package:part_practise/navigator/navigator_named_routine.dart';
 import 'package:part_practise/state/state_manage_mix.dart';
@@ -7,7 +10,38 @@ import 'package:part_practise/state/state_manage_self.dart';
 
 void main() {
   // runApp(const MyAppStateInMix());
-  runApp(const MyApp());
+  // 获取默认的错误处理
+  var defaultOnErr = FlutterError.onError;
+  // 重新设置默认的错误回调
+  FlutterError.onError = (FlutterErrorDetails details) {
+    defaultOnErr?.call(details);
+    reportErrorAndLog(details);
+  };
+  // 以沙盒模式运行
+  runZoned(() => runApp(const MyApp()),
+      zoneSpecification: ZoneSpecification(
+          print: (Zone self, ZoneDelegate parent, Zone zone, String line) {
+        collectLog(line);
+        parent.print(zone, "Interceptor: $line");
+      }, handleUncaughtError: (Zone self, ZoneDelegate parent, Zone zone,
+              Object error, StackTrace stackTrace) {
+        reportErrorAndLog(makeDetails(error, stackTrace));
+        parent.print(zone, '${error.toString()} $stackTrace');
+      }));
+}
+
+void collectLog(String line) {
+  //收集日志
+}
+
+void reportErrorAndLog(FlutterErrorDetails details) {
+  //上报错误和日志逻辑
+  Fluttertoast.showToast(msg: details.exception.toString());
+}
+
+FlutterErrorDetails makeDetails(Object obj, StackTrace stack) {
+  // 构建错误信息
+  return FlutterErrorDetails(exception: obj, stack: stack);
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +77,11 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        children: const [_StateEnterWidget(), _NavigatorEntranceWidget()],
+        children: const [
+          _StateEnterWidget(),
+          _NavigatorEntranceWidget(),
+          _ErrWidget()
+        ],
       );
 }
 
@@ -101,6 +139,42 @@ class _NavigatorEntranceWidget extends StatelessWidget {
       );
 }
 
+/// 导航
+class _ErrWidget extends StatelessWidget {
+  const _ErrWidget();
+
+  @override
+  Widget build(BuildContext context) => Column(
+        children: [
+          const TextTitleWidget("Handle Error"),
+          Row(
+            children: [
+              TextEntranceWidget.createEntrance(context, "try-catch", () {
+                try {
+                  throw Exception("Test throw one exception!!!");
+                } catch (e) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(e.toString())));
+                }
+              }),
+              TextEntranceWidget.createEntrance(context, "框架捕获异常", () {
+                throw Exception("Test throw one exception!!!");
+              }),
+              TextEntranceWidget.createEntrance(context, "异步异常", () {
+                // 以下这种异步的异常，虽然使用try-catch，但是是无法捕获的
+                try {
+                  Future.delayed(Duration(seconds: 1)).then(
+                      (e) => Future.error("Test throw one async exception!!!"));
+                } catch (e) {
+                  print(e);
+                }
+              }),
+            ],
+          )
+        ],
+      );
+}
+
 /// 标题文本
 class TextTitleWidget extends Text {
   /// https://stackoverflow.com/questions/55635663/invalid-constant-value-using-variable-as-parameter
@@ -118,27 +192,36 @@ class TextEntranceWidget extends Text {
   const TextEntranceWidget(super.data, {super.key})
       : super(style: const TextStyle(color: Colors.blue, fontSize: 14.0));
 
+  /// 默认：打开路由的点击响应
+  static VoidCallback defaultOnClick(BuildContext context, Widget route) =>
+      () async {
+        var result =
+            await Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return route;
+        }));
+        print("路由返回数据 $result");
+        if (null != result) {
+          /// https://stackoverflow.com/questions/72667782/undefined-name-mounted
+          /// The mounted property is only available in a StatefulWidget
+          /// 这里获取不到State，也就获取不到mounted字段
+          // if (!context.mounted) return;
+          /// 这里不建议使用BuildContext,因为在异步代码中，可能context以及销毁，但是暂时不知怎么处理
+          /// https://dart-lang.github.io/linter/lints/use_build_context_synchronously.html
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(result)));
+        }
+      };
+
   /// 一个入口按钮，并等待结果
-  static createEntranceAndWait(
-      BuildContext context, String text, Widget route) {
+  static createEntranceAndWait(BuildContext context, String text, Widget route,
+      {VoidCallback? callback}) {
+    return createEntrance(context, text, defaultOnClick(context, route));
+  }
+
+  static createEntrance(
+      BuildContext context, String text, VoidCallback? callback) {
     return TextButton(
-        onPressed: () async {
-          var result = await Navigator.push(context,
-              MaterialPageRoute(builder: (context) {
-            return route;
-          }));
-          print("路由返回数据 $result");
-          if (null != result) {
-            /// https://stackoverflow.com/questions/72667782/undefined-name-mounted
-            /// The mounted property is only available in a StatefulWidget
-            /// 这里获取不到State，也就获取不到mounted字段
-            // if (!context.mounted) return;
-            /// 这里不建议使用BuildContext,因为在异步代码中，可能context以及销毁，但是暂时不知怎么处理
-            /// https://dart-lang.github.io/linter/lints/use_build_context_synchronously.html
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(result)));
-          }
-        },
+        onPressed: callback,
         child: Container(
           decoration: BoxDecoration(border: Border.all(color: Colors.blue)),
           padding: const EdgeInsetsDirectional.all(3.0),
