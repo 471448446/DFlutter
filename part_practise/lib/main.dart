@@ -10,6 +10,7 @@ import 'package:part_practise/state/state_manage_mix.dart';
 import 'package:part_practise/state/state_manage_parent.dart';
 import 'package:part_practise/state/state_manage_self.dart';
 import 'package:part_practise/utils/ui.dart';
+import 'package:part_practise/widget/widget_main.dart';
 
 void main() {
   // runApp(const MyAppStateInMix());
@@ -85,6 +86,7 @@ class MyHomePage extends StatelessWidget {
           _NavigatorEntranceWidget(),
           ResourceWidget(),
           ErrWidget(),
+          DemoWidget(),
         ],
       );
 }
@@ -112,7 +114,10 @@ class _StateEnterWidget extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         children: [
           const TextTitleWidget("State 管理"),
-          Row(
+          Wrap(
+            spacing: 0,
+            runSpacing: 1,
+            alignment: WrapAlignment.start,
             children: [
               createEntrance(context, "父类管理状态", const MyAppStateInParent()),
               createEntrance(context, "子类管理状态", const MyAppStateInSelf()),

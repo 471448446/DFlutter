@@ -18,7 +18,7 @@ class TextEntranceWidget extends Text {
       : super(style: const TextStyle(color: Colors.blue, fontSize: 14.0));
 
   /// 默认：打开路由的点击响应
-  static VoidCallback defaultOnClick(BuildContext context, Widget route) =>
+  static VoidCallback _defaultOnClick(BuildContext context, Widget route) =>
       () async {
         var result =
             await Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -40,7 +40,7 @@ class TextEntranceWidget extends Text {
   /// 一个入口按钮，并等待结果
   static createEntranceAndWait(BuildContext context, String text, Widget route,
       {VoidCallback? callback}) {
-    return createEntrance(context, text, defaultOnClick(context, route));
+    return createEntrance(context, text, _defaultOnClick(context, route));
   }
 
   static createEntrance(
@@ -54,4 +54,27 @@ class TextEntranceWidget extends Text {
           child: TextEntranceWidget(text),
         ));
   }
+}
+
+abstract class SimplePageRoute extends StatelessWidget {
+  final String pageTitle;
+  late BuildContext context;
+
+  SimplePageRoute(this.pageTitle, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    this.context = context;
+    return MaterialApp(
+      title: pageTitle,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(pageTitle),
+        ),
+        body: pageBody(),
+      ),
+    );
+  }
+
+  Widget pageBody();
 }
