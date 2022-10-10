@@ -10,6 +10,7 @@ import 'package:part_practise/state/state_manage_mix.dart';
 import 'package:part_practise/state/state_manage_parent.dart';
 import 'package:part_practise/state/state_manage_self.dart';
 import 'package:part_practise/utils/ui.dart';
+import 'package:part_practise/widget/layout_main.dart';
 import 'package:part_practise/widget/widget_main.dart';
 
 void main() {
@@ -87,6 +88,7 @@ class MyHomePage extends StatelessWidget {
           ResourceWidget(),
           ErrWidget(),
           DemoWidget(),
+          LayoutDemoWidget(),
         ],
       );
 }

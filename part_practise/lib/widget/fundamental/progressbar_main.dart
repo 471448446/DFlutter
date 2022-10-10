@@ -59,7 +59,50 @@ class ProgressBarRoutePage extends SimplePageRoute {
               valueColor: const AlwaysStoppedAnimation(Colors.blue),
               // value: .7,
             ),
-          )
+          ),
+          _ProgressAnimationWidget()
         ],
       );
+}
+/// 展示一个耗时3秒的从灰色到蓝色的进度条，这里借助StatefulWidget来刷新进度条，并更新进度
+/// 具体动画是怎么操作的，先忽略
+class _ProgressAnimationWidget extends StatefulWidget {
+  @override
+  _ProgressAnimationWidgetState createState() => _ProgressAnimationWidgetState();
+}
+
+class _ProgressAnimationWidgetState extends State<_ProgressAnimationWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    //动画执行时间3秒
+    _animationController = AnimationController(
+      vsync: this, //注意State类需要混入SingleTickerProviderStateMixin（提供动画帧计时/触发器）
+      duration: const Duration(seconds: 3),
+    );
+    _animationController.forward();
+    _animationController.addListener(() => setState(() => {}));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: LinearProgressIndicator(
+        backgroundColor: Colors.grey[200],
+        valueColor: ColorTween(begin: Colors.grey, end: Colors.blue)
+            .animate(_animationController), // 从灰色变成蓝色
+        value: _animationController.value,
+      ),
+    );
+  }
 }
