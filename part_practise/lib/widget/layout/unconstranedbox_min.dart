@@ -8,7 +8,7 @@ import 'package:part_practise/utils/ui.dart';
 /// 只不过它不影响最终子元素redBox的大小，但仍然还是占有相应的空间，
 /// 可以认为此时的父ConstrainedBox是作用于子UnconstrainedBox上，而redBox只受子ConstrainedBox限制，这一点请读者务必注意。
 ///
-/// Column是水平剧中显示的，所以看到的效果数无法做对齐，先忽略
+/// Column是水平剧中显示的，所以看到的效果数无法做对齐，先忽略。？？这个其实是有个对其方式，可以通过纵轴crossAxisAlignment来修改
 /// 另外，第二个红色框框距离文字有一段距离是因为上面的（但是）的原因
 class UnconstrainedBoxRoutePage extends SimplePageRoute {
   UnconstrainedBoxRoutePage({super.key}) : super("UnconstrainedBoxRoutePage");

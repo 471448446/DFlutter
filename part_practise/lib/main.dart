@@ -10,6 +10,7 @@ import 'package:part_practise/state/state_manage_mix.dart';
 import 'package:part_practise/state/state_manage_parent.dart';
 import 'package:part_practise/state/state_manage_self.dart';
 import 'package:part_practise/utils/ui.dart';
+import 'package:part_practise/widget/container_main.dart';
 import 'package:part_practise/widget/layout_main.dart';
 import 'package:part_practise/widget/widget_main.dart';
 
@@ -81,15 +82,19 @@ class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: const [
-          _StateEnterWidget(),
-          _NavigatorEntranceWidget(),
-          ResourceWidget(),
-          ErrWidget(),
-          DemoWidget(),
-          LayoutDemoWidget(),
-        ],
+  Widget build(BuildContext context) => SingleChildScrollView(
+        // 滑动展示显示不完的数据
+        child: Column(
+          children: const [
+            _StateEnterWidget(),
+            _NavigatorEntranceWidget(),
+            ResourceWidget(),
+            ErrWidget(),
+            DemoWidget(),
+            LayoutDemoWidget(),
+            ContainerDemoWidget(),
+          ],
+        ),
       );
 }
 
