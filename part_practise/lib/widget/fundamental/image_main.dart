@@ -134,7 +134,7 @@ class ImageRoutePage extends StatelessWidget {
               //图片没有适应策略，会在显示空间内显示图片，如果图片比显示空间大，则显示空间只会显示图片中间部分。
               Row(
                 children: [
-                  const Text(" BoxFit.scaleDown"),
+                  const Text(" BoxFit.none"),
                   Container(
                     decoration:
                         BoxDecoration(border: Border.all(color: Colors.grey)),

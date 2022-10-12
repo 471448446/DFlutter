@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:part_practise/utils/ui.dart';
 
 class ContainerRoutePage extends SimplePageRoute {
-  ContainerRoutePage() : super('Container');
+  ContainerRoutePage({super.key}) : super('Container');
 
   @override
   Widget pageBody() => Column(
         children: [
+          const Text('综合应用'),
           Container(
             width: 100,
             height: 100,
@@ -21,11 +22,13 @@ class ContainerRoutePage extends SimplePageRoute {
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
           ),
+          const Text('下面是：margin!!!'),
           Container(
             margin: EdgeInsets.all(20.0), //容器外补白
             color: Colors.orange,
             child: Text("Hello world!"),
           ),
+          const Text('下面是：padding!!!'),
           Container(
             padding: EdgeInsets.all(20.0), //容器内补白
             color: Colors.orange,
