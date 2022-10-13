@@ -10,7 +10,12 @@ class ListViewLoadMoreRoutePage extends SimplePageRoute {
   /// 所以使用了Center，这是从父布局的方式来处理 [pageBody1]
   /// 也可以从内部 [pageBody2]
   @override
-  Widget pageBody() => _LoadMoreListView();
+  Widget pageBody() => Column(
+        children: [
+          const Text('这是一个表头，使用Expanded扩充下面的ListView'),
+          Expanded(child: _LoadMoreListView())
+        ],
+      );
 }
 
 class _LoadMoreListView extends StatefulWidget {
@@ -19,19 +24,19 @@ class _LoadMoreListView extends StatefulWidget {
 }
 
 class _LoadMoreListViewState extends State {
-  final words = [""];
+  final List<String> words = ['last not show in page'];
 
   final divider2 = const Divider(
     color: Colors.blue,
   );
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // 初始化先准备点数据
-    loadMore();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   // 初始化先准备点数据
+  //   loadMore();
+  // }
 
   @override
   Widget build(BuildContext context) => ListView.separated(
@@ -42,7 +47,7 @@ class _LoadMoreListViewState extends State {
       itemBuilder: (context, index) {
         if (index == words.length - 1) {
           // 最后一个了
-          if (words.length > 99) {
+          if (words.length > 49) {
             //假设只加载100个
             return Container(
               alignment: Alignment.center,
@@ -66,14 +71,15 @@ class _LoadMoreListViewState extends State {
             );
           }
         }
-        return ListTile(title: Text(words[index]));
+        return ListTile(title: Text("$index :${words[index]}"));
       });
 
   void loadMore() {
-    Future.delayed(const Duration(seconds: 3)).then((value) => {
+    Future.delayed(const Duration(seconds: 2)).then((value) => {
           setState(() {
             var loaded = generateWordPairs().take(20).map((e) => e.asLowerCase);
-            words.addAll(loaded);
+            words.insertAll(words.length - 1, loaded);
+            // words.addAll(loaded);
           })
         });
   }

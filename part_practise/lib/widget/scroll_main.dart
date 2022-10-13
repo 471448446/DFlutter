@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:part_practise/utils/ui.dart';
+import 'package:part_practise/widget/scroll/animatedlist.dart';
 import 'package:part_practise/widget/scroll/listview.dart';
 import 'package:part_practise/widget/scroll/listview_builder.dart';
 import 'package:part_practise/widget/scroll/listview_loadmore.dart';
 import 'package:part_practise/widget/scroll/listview_separator.dart';
+import 'package:part_practise/widget/scroll/scroll_controller.dart';
+import 'package:part_practise/widget/scroll/scroll_listener.dart';
 import 'package:part_practise/widget/scroll/signlescrollchild.dart';
 
 class ScrollDemoWidget extends StatelessWidget {
@@ -27,6 +30,14 @@ class ScrollDemoWidget extends StatelessWidget {
                   context, "ListView.separator()", ListView3RoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "ListView loadMore)", ListViewLoadMoreRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "ScrollController", ScrollController1RoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context,
+                  "ScrollNotificationListener",
+                  ScrollControllerNotificationListenerRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "AnimatedList", AnimatedListeRoutePage()),
             ])
       ]);
 }
