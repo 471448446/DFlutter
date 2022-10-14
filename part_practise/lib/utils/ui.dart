@@ -101,3 +101,39 @@ class LayoutLogPrint<T> extends StatelessWidget {
     });
   }
 }
+
+/// 作者实现的一个可选是否需要保存状态的组件
+/// 这里采用mixin的方式混合AutomaticKeepAliveClientMixin，然后在方法处[_KeepAliveWrapperState.wantKeepAlive]，是否需要保存状态。
+class KeepAliveWrapper extends StatefulWidget {
+  const KeepAliveWrapper({
+    Key? key,
+    this.keepAlive = true,
+    required this.child,
+  }) : super(key: key);
+  final bool keepAlive;
+  final Widget child;
+
+  @override
+  _KeepAliveWrapperState createState() => _KeepAliveWrapperState();
+}
+
+class _KeepAliveWrapperState extends State<KeepAliveWrapper>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return widget.child;
+  }
+
+  @override
+  void didUpdateWidget(covariant KeepAliveWrapper oldWidget) {
+    if (oldWidget.keepAlive != widget.keepAlive) {
+      // keepAlive 状态需要更新，实现在 AutomaticKeepAliveClientMixin 中
+      updateKeepAlive();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  bool get wantKeepAlive => widget.keepAlive;
+}

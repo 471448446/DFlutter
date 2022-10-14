@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:part_practise/utils/ui.dart';
+import 'package:part_practise/widget/scroll/PageViewCacheRoutePage.dart';
+import 'package:part_practise/widget/scroll/PageViewRoutePage.dart';
 import 'package:part_practise/widget/scroll/animatedlist.dart';
+import 'package:part_practise/widget/scroll/gridlayout.dart';
 import 'package:part_practise/widget/scroll/listview.dart';
 import 'package:part_practise/widget/scroll/listview_builder.dart';
 import 'package:part_practise/widget/scroll/listview_loadmore.dart';
 import 'package:part_practise/widget/scroll/listview_separator.dart';
+import 'package:part_practise/widget/scroll/pageview_bottombar.dart';
 import 'package:part_practise/widget/scroll/scroll_controller.dart';
 import 'package:part_practise/widget/scroll/scroll_listener.dart';
 import 'package:part_practise/widget/scroll/signlescrollchild.dart';
+import 'package:part_practise/widget/scroll/tabbar.dart';
 
 class ScrollDemoWidget extends StatelessWidget {
   const ScrollDemoWidget({super.key});
@@ -38,6 +43,16 @@ class ScrollDemoWidget extends StatelessWidget {
                   ScrollControllerNotificationListenerRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "AnimatedList", AnimatedListeRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "GridView", GridViewRoutPage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "PageView", PageViewRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "PageView_cache_all", PageViewCacheRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "TabBar", TabBarRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "PageViewAndBottomNavigationBar", PageViewAndBottomNavigationBarRoutePage()),
             ])
       ]);
 }

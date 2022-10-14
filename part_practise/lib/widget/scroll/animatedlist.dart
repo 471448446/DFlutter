@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:part_practise/utils/ui.dart';
 
+/// 做动画的列表
 class AnimatedListeRoutePage extends SimplePageRoute {
   AnimatedListeRoutePage() : super('AnimatedList');
 
@@ -47,7 +48,7 @@ class _PagesState extends State<_Pages> {
           Align(
             alignment: Alignment.centerRight,
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(60),
               child: FloatingActionButton(
                 onPressed: () {
                   addMoreDate();
@@ -82,7 +83,23 @@ class _PagesState extends State<_Pages> {
     // setState(() {
     //   datas.removeAt(index);
     // });
-    datas.removeAt(index);
-    globalKey.currentState?.removeItem(index, (context, animation) => null);
+    globalKey.currentState?.removeItem(index, (context, animation) {
+      var listViewItem = listItem(index);
+      print('删除 ${datas[index]}');
+      // 真实的移除数据
+      datas.removeAt(index);
+      return FadeTransition(
+          opacity: CurvedAnimation(
+            parent: animation,
+            //让透明度变化的更快一些
+            curve: const Interval(0.5, 1.0),
+          ),
+          // 不断缩小列表项的高度
+          child: SizeTransition(
+            sizeFactor: animation,
+            axisAlignment: 0.0,
+            child: listViewItem,
+          ));
+    });
   }
 }
