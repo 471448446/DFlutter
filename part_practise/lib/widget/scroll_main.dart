@@ -3,16 +3,21 @@ import 'package:part_practise/utils/ui.dart';
 import 'package:part_practise/widget/scroll/PageViewCacheRoutePage.dart';
 import 'package:part_practise/widget/scroll/PageViewRoutePage.dart';
 import 'package:part_practise/widget/scroll/animatedlist.dart';
+import 'package:part_practise/widget/scroll/customscrollview_combine_nosliver.dart';
+import 'package:part_practise/widget/scroll/customscrollview_demo.dart';
 import 'package:part_practise/widget/scroll/gridlayout.dart';
 import 'package:part_practise/widget/scroll/listview.dart';
 import 'package:part_practise/widget/scroll/listview_builder.dart';
 import 'package:part_practise/widget/scroll/listview_loadmore.dart';
 import 'package:part_practise/widget/scroll/listview_separator.dart';
+import 'package:part_practise/widget/scroll/nestedscrollview_test.dart';
 import 'package:part_practise/widget/scroll/pageview_bottombar.dart';
 import 'package:part_practise/widget/scroll/scroll_controller.dart';
 import 'package:part_practise/widget/scroll/scroll_listener.dart';
 import 'package:part_practise/widget/scroll/signlescrollchild.dart';
 import 'package:part_practise/widget/scroll/tabbar.dart';
+import 'package:part_practise/widget/scroll/customscrollview_two_listview_in_vertical.dart';
+import 'package:part_practise/widget/scroll/customscrollview_two_listview_in_vertical_fix.dart';
 
 class ScrollDemoWidget extends StatelessWidget {
   const ScrollDemoWidget({super.key});
@@ -52,7 +57,27 @@ class ScrollDemoWidget extends StatelessWidget {
               TextEntranceWidget.createEntranceAndWait(
                   context, "TabBar", TabBarRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
-                  context, "PageViewAndBottomNavigationBar", PageViewAndBottomNavigationBarRoutePage()),
+                  context,
+                  "PageViewAndBottomNavigationBar",
+                  PageViewAndBottomNavigationBarRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(context,
+                  "CustomScrollView_TwoList", TwoListViewInVerticalRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context,
+                  "CustomScrollView_TwoListFix",
+                  TwoListViewInVerticalFixRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context,
+                  "CustomScrollView_Demo",
+                  CustomScrollViewDemoRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context,
+                  "CustomScrollView_CombineNoSliver",
+                  CustomScrollViewCombineNoSliver()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context,
+                  "NestedScrollView_嵌套",
+                  NestedScrollViewTest()),
             ])
       ]);
 }

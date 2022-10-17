@@ -11,6 +11,7 @@ import 'package:part_practise/state/state_manage_parent.dart';
 import 'package:part_practise/state/state_manage_self.dart';
 import 'package:part_practise/utils/ui.dart';
 import 'package:part_practise/widget/container_main.dart';
+import 'package:part_practise/widget/function_main.dart';
 import 'package:part_practise/widget/layout_main.dart';
 import 'package:part_practise/widget/scroll_main.dart';
 import 'package:part_practise/widget/widget_main.dart';
@@ -73,18 +74,31 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text("Hello")),
-        body: const MyHomePage(),
+        body: MyHomePage(),
       ),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  late ScrollController _scrollController;
+  DateTime? _lastPressedAt; //上次点击时间
+
+  MyHomePage({super.key}) {
+    _scrollController = ScrollController();
+    // 打开APP时，直接滚动到底部
+    //https://stackoverflow.com/questions/61437549/flutter-how-to-automaticallly-scroll-to-end-of-singlechildscrollview
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+          duration: const Duration(seconds: 2), curve: Curves.ease);
+    });
+  }
 
   @override
-  Widget build(BuildContext context) => Scrollbar(
+  Widget build(BuildContext context) => WillPopScope(
+      child: Scrollbar(
         child: SingleChildScrollView(
+          controller: _scrollController,
           // 滑动展示显示不完的数据
           child: Column(
             children: const [
@@ -96,10 +110,22 @@ class MyHomePage extends StatelessWidget {
               LayoutDemoWidget(),
               ContainerDemoWidget(),
               ScrollDemoWidget(),
+              FunctionDemoWidget(),
             ],
           ),
         ),
-      );
+      ),
+      onWillPop: () async {
+        if (_lastPressedAt == null ||
+            DateTime.now().difference(_lastPressedAt!) >
+                const Duration(seconds: 1)) {
+          //两次点击间隔超过1秒则重新计时
+          _lastPressedAt = DateTime.now();
+          Fluttertoast.showToast(msg: '再次点击,退出APP!');
+          return false;
+        }
+        return true;
+      });
 }
 
 /// 状态管理
