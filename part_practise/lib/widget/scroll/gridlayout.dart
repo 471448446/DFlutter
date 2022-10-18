@@ -19,7 +19,7 @@ class GridViewRoutPage extends SimplePageRoute {
   }
 
   @override
-  Widget pageBody() => Padding(
+  Widget pageBody(BuildContext context) => Padding(
         padding: const EdgeInsets.all(10),
         child: GridView.builder(
             gridDelegate: sliverGridDelegateWithMaxCrossAxisExtent(),

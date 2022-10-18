@@ -15,7 +15,7 @@ class TwoListViewInVerticalRoutePage extends SimplePageRoute {
   );
 
   @override
-  Widget pageBody() =>
+  Widget pageBody(BuildContext context) =>
       Column(
         children: [
           Expanded(child: listView),

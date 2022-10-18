@@ -178,7 +178,7 @@ class _NavigatorEntranceWidget extends StatelessWidget {
               TextEntranceWidget.createEntranceAndWait(
                   context, "startForResult", const DetailsPage()),
               TextEntranceWidget.createEntranceAndWait(
-                  context, '命名路由', const NamedRoutePage()),
+                  context, '命名路由', NamedRoutePage("我是参数")),
             ],
           )
         ],

@@ -8,7 +8,7 @@ class InheritedWidgetRoutePage extends SimplePageRoute {
   InheritedWidgetRoutePage({super.key}) : super('InheritedWidget');
 
   @override
-  Widget pageBody() => _Pages();
+  Widget pageBody(BuildContext context) => _Pages();
 }
 
 /// 这里的Stateful 是因为，页面有个点击按钮，点击后，页面要刷新

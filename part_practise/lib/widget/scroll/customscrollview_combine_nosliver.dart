@@ -21,7 +21,7 @@ class CustomScrollViewCombineNoSliver extends SimplePageRoute {
   }
 
   @override
-  Widget pageBody() => CustomScrollView(
+  Widget pageBody(BuildContext context) => CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
             child: SizedBox(

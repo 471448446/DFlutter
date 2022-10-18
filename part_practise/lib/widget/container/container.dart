@@ -5,7 +5,7 @@ class ContainerRoutePage extends SimplePageRoute {
   ContainerRoutePage({super.key}) : super('Container');
 
   @override
-  Widget pageBody() => Column(
+  Widget pageBody(BuildContext context) => Column(
         children: [
           const Text('综合应用'),
           Container(

@@ -8,7 +8,7 @@ class WrapLayoutRoutePage extends SimplePageRoute {
   WrapLayoutRoutePage() :super('WrapLayout');
 
   @override
-  Widget pageBody() =>
+  Widget pageBody(BuildContext context) =>
       Wrap(
         spacing: 8.0, // 主轴(水平)方向间距
         runSpacing: 4.0, // 纵轴（垂直）方向间距

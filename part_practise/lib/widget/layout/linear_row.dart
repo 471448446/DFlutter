@@ -13,7 +13,7 @@ class RowDemoWidget extends SimplePageRoute {
       ));
 
   @override
-  Widget pageBody() {
+  Widget pageBody(BuildContext context) {
     return Column(
       children: [
         const Text('主轴对其方式，这里Row主轴就是水平的X轴'),

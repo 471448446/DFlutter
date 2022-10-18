@@ -8,7 +8,7 @@ class ClipRoutePage extends SimplePageRoute {
   ClipRoutePage({super.key}) : super('Clip');
 
   @override
-  Widget pageBody() {
+  Widget pageBody(BuildContext context) {
     final image = Image.asset('assets/images/icon.png');
     return SingleChildScrollView(
       child: Column(

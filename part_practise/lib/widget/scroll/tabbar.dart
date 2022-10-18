@@ -5,7 +5,7 @@ class TabBarRoutePage extends SimplePageRoute {
   TabBarRoutePage({super.key}) : super('TabBar');
 
   @override
-  Widget pageBody() => _Pages();
+  Widget pageBody(BuildContext context) => _Pages();
 }
 
 class _Pages extends StatefulWidget {

@@ -5,7 +5,7 @@ class InputFormRoutePage extends SimplePageRoute {
   InputFormRoutePage({super.key}) : super('Input From');
 
   @override
-  Widget pageBody() => _FormTestRoute();
+  Widget pageBody(BuildContext context) => _FormTestRoute();
 }
 
 class _FormTestRoute extends StatefulWidget {

@@ -19,7 +19,7 @@ class InputRoutePage extends SimplePageRoute {
   InputRoutePage() : super('输入框');
 
   @override
-  Widget pageBody() {
+  Widget pageBody(BuildContext context) {
     final loginNameController = TextEditingController();
     final loginPwdController = TextEditingController();
     // 监听文本变化

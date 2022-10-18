@@ -7,7 +7,7 @@ class PageViewCacheRoutePage extends SimplePageRoute {
   PageViewCacheRoutePage({super.key}) : super('like ViewPager');
 
   @override
-  Widget pageBody() => PageView(
+  Widget pageBody(BuildContext context) => PageView(
         scrollDirection: Axis.horizontal,
         children: [_Page(0), _Page(1), _Page(2), _Page(3), _Page(4), _Page(5)],
       );

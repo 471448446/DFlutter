@@ -7,7 +7,7 @@ class ConstrainedBoxRoutePage extends SimplePageRoute {
   ConstrainedBoxRoutePage({super.key}) : super("ConstrainedBox & SizeBox");
 
   @override
-  Widget pageBody() {
+  Widget pageBody(BuildContext context) {
     const redBox = DecoratedBox(
       decoration: BoxDecoration(color: Colors.red),
     );

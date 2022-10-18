@@ -10,7 +10,7 @@ class PaddingRoutePage extends SimplePageRoute {
   PaddingRoutePage({super.key}) : super('Padding');
 
   @override
-  Widget pageBody() => Column(
+  Widget pageBody(BuildContext context) => Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(10),

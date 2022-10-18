@@ -7,7 +7,7 @@ class FlexLayoutRoutePage extends SimplePageRoute {
   FlexLayoutRoutePage({super.key}) : super('FlexLayout');
 
   @override
-  Widget pageBody() => Flex(
+  Widget pageBody(BuildContext context) => Flex(
         direction: Axis.vertical,
         children: [
           const Text('使用flex属性实现weight'),

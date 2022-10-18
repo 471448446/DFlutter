@@ -6,7 +6,7 @@ class ScrollControllerNotificationListenerRoutePage extends SimplePageRoute {
   ScrollControllerNotificationListenerRoutePage({super.key}) : super('滚动控制');
 
   @override
-  Widget pageBody() => _Page();
+  Widget pageBody(BuildContext context) => _Page();
 }
 
 class _Page extends StatefulWidget {

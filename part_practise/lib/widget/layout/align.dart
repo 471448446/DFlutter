@@ -5,7 +5,7 @@ class AlignLayoutRoutePage extends SimplePageRoute {
   AlignLayoutRoutePage({super.key}) : super('WrapLayout');
 
   @override
-  Widget pageBody() => SingleChildScrollView(
+  Widget pageBody(BuildContext context) => SingleChildScrollView(
         child: Column(
           children: [
             const Text('红色边框是父控件，中间的方块是对其Widget'),

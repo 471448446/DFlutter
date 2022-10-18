@@ -37,5 +37,5 @@ class TwoListViewInVerticalFixRoutePage extends SimplePageRoute {
   }
 
   @override
-  Widget pageBody() => buildTwoSliverList();
+  Widget pageBody(BuildContext context) => buildTwoSliverList();
 }

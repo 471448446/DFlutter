@@ -7,7 +7,7 @@ class DecoratedBoxRoutePage extends SimplePageRoute {
   DecoratedBoxRoutePage({super.key}) : super('DecoratedBox');
 
   @override
-  Widget pageBody() => Padding(
+  Widget pageBody(BuildContext context) => Padding(
         padding: const EdgeInsets.all(10),
         child: DecoratedBox(
           decoration: BoxDecoration(

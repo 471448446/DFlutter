@@ -6,7 +6,7 @@ class TransformRoutePage extends SimplePageRoute {
   TransformRoutePage({super.key}) : super('Transform');
 
   @override
-  Widget pageBody() => SingleChildScrollView(
+  Widget pageBody(BuildContext context) => SingleChildScrollView(
         child: Column(
           children: [
             Padding(

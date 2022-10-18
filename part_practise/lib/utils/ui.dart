@@ -71,12 +71,12 @@ abstract class SimplePageRoute extends StatelessWidget {
         appBar: AppBar(
           title: Text(pageTitle),
         ),
-        body: pageBody(),
+        body: pageBody(context),
       ),
     );
   }
 
-  Widget pageBody();
+  Widget pageBody(BuildContext context);
 }
 
 class LayoutLogPrint<T> extends StatelessWidget {

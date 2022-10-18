@@ -40,7 +40,7 @@ class LayoutBuilderRoute extends SimplePageRoute {
   LayoutBuilderRoute() : super('LayoutBuilder');
 
   @override
-  Widget pageBody() {
+  Widget pageBody(BuildContext context) {
     var _children = List.filled(6, Text("A"));
     // Column在本示例中在水平方向的最大宽度为屏幕的宽度
     return Column(

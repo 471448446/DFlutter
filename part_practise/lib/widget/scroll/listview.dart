@@ -9,7 +9,7 @@ class ListView1RoutePage extends SimplePageRoute {
   /// 所以使用了Center，这是从父布局的方式来处理 [pageBody1]
   /// 也可以从内部 [pageBody2]
   @override
-  Widget pageBody() => ListView(
+  Widget pageBody(BuildContext context) => ListView(
         padding: const EdgeInsets.all(10),
         children: const [
           Text('I\'m dedicating every day to you'),

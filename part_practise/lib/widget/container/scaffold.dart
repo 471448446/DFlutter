@@ -78,7 +78,7 @@ class _ScaffoldRoutePageState extends State<ScaffoldRoutePage> {
         body: pages[selectIndex],
       );
 
-  providePageBody() => Column(
+  providepageBody(BuildContext context) => Column(
         children: [
           BottomAppBar(
             color: Colors.white,

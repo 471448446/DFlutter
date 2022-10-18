@@ -9,7 +9,7 @@ class SingleScrollRoutePage extends SimplePageRoute {
   /// 所以使用了Center，这是从父布局的方式来处理 [pageBody1]
   /// 也可以从内部 [pageBody2]
   @override
-  Widget pageBody() => pageBody2();
+  Widget pageBody(BuildContext context) => pageBody2();
 
   Widget pageBody0() => Scrollbar(
         child: SingleChildScrollView(

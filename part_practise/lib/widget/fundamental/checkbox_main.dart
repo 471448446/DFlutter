@@ -9,7 +9,7 @@ class CheckBoxRoutePage extends SimplePageRoute {
   CheckBoxRoutePage({super.key}) : super('CheckBox');
 
   @override
-  Widget pageBody() => _CheckBoxWidget();
+  Widget pageBody(BuildContext context) => _CheckBoxWidget();
 }
 
 class _CheckBoxWidget extends StatefulWidget {

@@ -6,7 +6,7 @@ class CustomScrollViewDemoRoutePage extends SimplePageRoute {
   CustomScrollViewDemoRoutePage({super.key}) : super('CustomScrollView示例');
 
   @override
-  Widget pageBody() => CustomScrollView(
+  Widget pageBody(BuildContext context) => CustomScrollView(
         slivers: [
           // AppBar，包含一个导航栏.
           SliverAppBar(

@@ -7,7 +7,7 @@ class FitBox2RoutePage extends SimplePageRoute {
   FitBox2RoutePage({super.key}) : super('单行缩放布局');
 
   @override
-  Widget pageBody() {
+  Widget pageBody(BuildContext context) {
     return Center(
       child: Column(
         children: [

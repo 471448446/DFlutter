@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 /// 如何申明并使用命名路由，就是一个map
 /// 如何传递参数，
 class NamedRoutePage extends StatelessWidget {
-  const NamedRoutePage({super.key});
+  // 传递的参数
+  var name = "";
+
+  NamedRoutePage(this.name, {super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -30,7 +33,7 @@ class NamedRoutePage extends StatelessWidget {
                 Navigator.of(context, rootNavigator: true)
                     .pushNamed("route_test_01", arguments: "张三");
               },
-              child: const Text("点击启动新页面"),
+              child: Text("点击启动新页面\n传递的参数：$name"),
             ),
           ),
         ),

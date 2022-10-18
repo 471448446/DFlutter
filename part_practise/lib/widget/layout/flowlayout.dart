@@ -8,7 +8,7 @@ class FlowRoutePage extends SimplePageRoute {
   FlowRoutePage() : super('FlowLayout');
 
   @override
-  Widget pageBody() => Column(
+  Widget pageBody(BuildContext context) => Column(
         children: [
           const Text('书上的Demo'),
           Flow(

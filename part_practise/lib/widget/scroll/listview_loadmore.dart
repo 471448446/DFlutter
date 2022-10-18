@@ -10,7 +10,7 @@ class ListViewLoadMoreRoutePage extends SimplePageRoute {
   /// 所以使用了Center，这是从父布局的方式来处理 [pageBody1]
   /// 也可以从内部 [pageBody2]
   @override
-  Widget pageBody() => Column(
+  Widget pageBody(BuildContext context) => Column(
         children: [
           const Text('这是一个表头，使用Expanded扩充下面的ListView'),
           Expanded(child: _LoadMoreListView())

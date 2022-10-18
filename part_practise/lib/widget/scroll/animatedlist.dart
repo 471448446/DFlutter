@@ -7,7 +7,7 @@ class AnimatedListeRoutePage extends SimplePageRoute {
   AnimatedListeRoutePage() : super('AnimatedList');
 
   @override
-  Widget pageBody() => _Pages();
+  Widget pageBody(BuildContext context) => _Pages();
 }
 
 class _Pages extends StatefulWidget {

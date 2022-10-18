@@ -8,7 +8,7 @@ class StackLayoutRoutePage extends SimplePageRoute {
   StackLayoutRoutePage() : super('Stack');
 
   @override
-  Widget pageBody() => SizedBox(
+  Widget pageBody(BuildContext context) => SizedBox(
         width: double.infinity,
         height: double.infinity,
         // 这里用SizedBox是因为限制下大小，Stack本身没有确定大小，根据父组件来的

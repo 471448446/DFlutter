@@ -6,7 +6,7 @@ class FitBoxRoutePage extends SimplePageRoute {
   FitBoxRoutePage({super.key}) : super('FitBox');
 
   @override
-  Widget pageBody() => Column(
+  Widget pageBody(BuildContext context) => Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30.0),

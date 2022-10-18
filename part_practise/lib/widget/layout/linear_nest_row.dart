@@ -8,7 +8,7 @@ class RowNestRoutePagetePage extends SimplePageRoute {
   RowNestRoutePagetePage() : super('colum嵌套colum');
 
   @override
-  Widget pageBody() => Container(
+  Widget pageBody(BuildContext context) => Container(
         color: Colors.green,
         child: Padding(
           padding: const EdgeInsets.all(16.0),

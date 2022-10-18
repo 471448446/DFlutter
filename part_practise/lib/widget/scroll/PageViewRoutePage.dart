@@ -7,7 +7,7 @@ class PageViewRoutePage extends SimplePageRoute {
   PageViewRoutePage({super.key}) : super('like ViewPager');
 
   @override
-  Widget pageBody() => PageView(
+  Widget pageBody(BuildContext context) => PageView(
         scrollDirection: Axis.horizontal,
         allowImplicitScrolling: true, // 该参数，只能缓存前后一个页面
         children: [_Page(0), _Page(1), _Page(2), _Page(3), _Page(4), _Page(5)],

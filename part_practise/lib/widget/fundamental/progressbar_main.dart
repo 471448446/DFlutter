@@ -12,7 +12,7 @@ class ProgressBarRoutePage extends SimplePageRoute {
   ProgressBarRoutePage({super.key}) : super('Progress Bar');
 
   @override
-  Widget pageBody() => Column(
+  Widget pageBody(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           LinearProgressIndicator(

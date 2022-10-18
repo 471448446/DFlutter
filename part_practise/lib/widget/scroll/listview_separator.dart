@@ -15,7 +15,7 @@ class ListView3RoutePage extends SimplePageRoute {
   /// 所以使用了Center，这是从父布局的方式来处理 [pageBody1]
   /// 也可以从内部 [pageBody2]
   @override
-  Widget pageBody() => ListView.separated(
+  Widget pageBody(BuildContext context) => ListView.separated(
       itemCount: 20, // 限制个数，否正是无限
       separatorBuilder: (BuildContext context, int index) {
         return index % 2 == 0 ? divider1 : divider2;

@@ -9,7 +9,7 @@ class IconRoutePage extends SimplePageRoute {
    IconRoutePage({super.key}) : super('Icon Demo');
 
   @override
-  Widget pageBody() {
+  Widget pageBody(BuildContext context) {
     String icons = "";
 // accessible: 0xe03e
     icons += "\uE03e";

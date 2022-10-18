@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:part_practise/utils/ui.dart';
 import 'package:part_practise/widget/function/inheritedwidget.dart';
+import 'package:part_practise/widget/function/like_provider.dart';
 
 /// 一些常用功能组件
 class FunctionDemoWidget extends StatelessWidget {
@@ -16,6 +17,8 @@ class FunctionDemoWidget extends StatelessWidget {
             children: [
               TextEntranceWidget.createEntranceAndWait(
                   context, "共享数据", InheritedWidgetRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "共享数据Provider", LikeProviderRoutePage()),
             ])
       ]);
 }

@@ -10,7 +10,7 @@ class TextFocusRoutePage extends SimplePageRoute {
   TextFocusRoutePage() : super('输入框移动焦点');
 
   @override
-  Widget pageBody() => _TextFocusWidget();
+  Widget pageBody(BuildContext context) => _TextFocusWidget();
 }
 
 class _TextFocusWidget extends StatefulWidget {
