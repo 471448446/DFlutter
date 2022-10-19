@@ -3,52 +3,65 @@ import 'package:flutter/material.dart';
 import 'package:part_practise/utils/ui.dart';
 
 ///我们需要实现一个显示购物车中所有商品总价的功能
+///一开始一直失败，是因为，在ChangeNotifierProvider.of()方法处，没有传递具体的泛型类型，
+///导致内部调用dependOnInheritedWidgetOfExactType<InheritedProvider<T>>中的T是 dynamic。所以无法获取到InheritedWidget。
+///既要像这样调用：ChangeNotifierProvider.of<CartModel>()，指定具体的泛型类型
+///PS：通过在调用ChangeNotifierProvider.of方法处加断点，打印context，发现没有问题，发现是传进去的泛型不对，shit
+///以及：https://blog.csdn.net/petterp/article/details/111770747 使用Builder的原因，指是为了能在当代你的context上找到InheritedWidget
+///一个Widget（StatelessWidget、StatefulWidget）被渲染后对应一个Element，而Element就是BuilderContext的子类
 class LikeProviderRoutePage extends SimplePageRoute {
   LikeProviderRoutePage({super.key}) : super('模拟Provider');
 
   @override
-  Widget pageBody(BuildContext context) =>
-      Center(
+  Widget pageBody(BuildContext context) => Center(
         child: ChangeNotifierProvider<CartModel>(
             data: CartModel(),
-            child: Builder(builder: (context) {
-              print("Column use Builder context is $context");
-              return Column(
-                children: [
-                  Builder(builder: (context) {
-                    print("Column children Text use Builder context is $context");
-                    return Text(
-                        "总价:${ChangeNotifierProvider
-                            .of(context)
-                            ?.allPrice}");
-                  }),
-                  Text(
-                      "总价:${ChangeNotifierProvider.of(context)?.allPrice}"),
-                  TextTestWidget(),
-                  Builder(builder: (context) {
-                    print(
-                        "Column children ElevatedButton build context is $context");
-                    return ElevatedButton(
-                      onPressed: () {
-                        print(
-                            "Column children ElevatedButton click Builder context is $context");
-                        ChangeNotifierProvider.of(context)
-                            ?.addGoods(Goods(20, "张三"));
-                      },
-                      child: const Text("增加商品"),
-                    );
-                  })
-                ],
-              );
-            },)),
+            child: Builder(
+              builder: (context) {
+                print("Column use Builder context is $context");
+                return Column(
+                  children: [
+                    // 使用Builder，传递正确的Context
+                    Builder(builder: (context) {
+                      print(
+                          "Column children Text use Builder context is $context");
+                      return Text(
+                          "总价:${ChangeNotifierProvider.of<CartModel>(context)?.allPrice}");
+                    }),
+                    // 这里不加也没问题，因为ChangeNotifierProvider的child地方以及加了Builder，
+                    // 能够传递父类InheritedWidget的Context，否正传递的LikeProviderRoutePage的contxt
+                    Text(
+                        "总价:${ChangeNotifierProvider.of<CartModel>(context)?.allPrice}"),
+                    //或者写一个单独的类也可以
+                    TextTestWidget(),
+                    Builder(builder: (context) {
+                      print(
+                          "Column children ElevatedButton build context is $context");
+                      return ElevatedButton(
+                        onPressed: () {
+                          print(
+                              "Column children ElevatedButton click Builder context is $context");
+                          ChangeNotifierProvider.of<CartModel>(context)
+                              ?.addGoods(Goods(20, "张三"));
+                        },
+                        child: const Text("增加商品"),
+                      );
+                    })
+                  ],
+                );
+              },
+            )),
       );
 }
-class TextTestWidget extends StatelessWidget{
+
+/// 如果不适用Builder，可以单独写一个类传递正确的context
+/// 这里提现不出来，因为在最外层，ChangeNotifierProvider的child地方以及加了Builder，能正确传递Inherited的Context了。
+class TextTestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("TextTest context is $context");
     return Text(
-        "总价:${ChangeNotifierProvider.of(context)?.allPrice}");
+        "总价:${ChangeNotifierProvider.of<CartModel>(context)?.allPrice}");
   }
 }
 //
@@ -144,9 +157,9 @@ class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
   //定义一个便捷方法，方便子树中的widget获取共享数据
   static T? of<T>(BuildContext context) {
     // final type = _typeOf<InheritedProvider<T>>();
-    print("ChangeNotifierProvider of() context is $context");
+    print("ChangeNotifierProvider of() context is $context T is $T");
     final provider =
-    context.dependOnInheritedWidgetOfExactType<InheritedProvider<T>>();
+        context.dependOnInheritedWidgetOfExactType<InheritedProvider<T>>();
     print("ChangeNotifierProvider of() 获取到的provider: $provider");
     return provider?.data;
   }

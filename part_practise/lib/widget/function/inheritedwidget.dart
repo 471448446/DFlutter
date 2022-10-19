@@ -32,6 +32,20 @@ class _PagesState extends State<_Pages> {
                 padding: const EdgeInsets.only(bottom: 20.0),
                 child: _TestWidget(), //子widget中依赖ShareDataWidget
               ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+
+                /// 这里引用的context是 ` Widget build(BuildContext context) => Center(`函数的参数中的context
+                /// 所以是无法找到_SharedWidget的，因为_SharedWidget是在函数里面生成的
+                /// 这里其找到父类的Context就可以了，但是无法直接引用，解决方式就是_TestWidget写成单独的类
+                /// 或者使用Builder
+                /// Builder(builder(context){
+                ///             return Text("${_SharedWidget.of(context)?.data}");
+                ///         })
+                ///
+                child: Text(
+                    "${_SharedWidget.of(context)?.data}"), //子widget中依赖ShareDataWidget
+              ),
               ElevatedButton(
                 child: const Text("Increment"),
                 //每点击一次，将count自增，然后重新build,ShareDataWidget的data将被更新
