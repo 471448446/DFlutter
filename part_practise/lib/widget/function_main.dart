@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:part_practise/utils/ui.dart';
+import 'package:part_practise/widget/function/alert_dialog.dart';
+import 'package:part_practise/widget/function/future_builder.dart';
 import 'package:part_practise/widget/function/inheritedwidget.dart';
 import 'package:part_practise/widget/function/like_provider.dart';
+import 'package:part_practise/widget/function/value_listenable.dart';
+import 'package:part_practise/widget/function/value_listenable2.dart';
+
+import 'function/stream_builder.dart';
 
 /// 一些常用功能组件
 class FunctionDemoWidget extends StatelessWidget {
@@ -19,6 +25,16 @@ class FunctionDemoWidget extends StatelessWidget {
                   context, "共享数据", InheritedWidgetRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "共享数据Provider", LikeProviderRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "ValueListenable", ValueListenableRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "ValueListenable2", ValueListenable2RoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "异步刷新FutureBuilder", FutureBuilderRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "异步刷新StreamBuilder", StreamBuilderRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "AlertDialog", AlertDialogRoutePage()),
             ])
       ]);
 }

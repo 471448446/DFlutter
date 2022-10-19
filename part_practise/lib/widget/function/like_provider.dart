@@ -34,6 +34,9 @@ class LikeProviderRoutePage extends SimplePageRoute {
                         "总价:${ChangeNotifierProvider.of<CartModel>(context)?.allPrice}"),
                     //或者写一个单独的类也可以
                     TextTestWidget(),
+                    Consumer<CartModel>(
+                        builder: (context, data) =>
+                            Text('总价使用Consumer:${data?.allPrice}')),
                     Builder(builder: (context) {
                       print(
                           "Column children ElevatedButton build context is $context");
@@ -41,7 +44,11 @@ class LikeProviderRoutePage extends SimplePageRoute {
                         onPressed: () {
                           print(
                               "Column children ElevatedButton click Builder context is $context");
-                          ChangeNotifierProvider.of<CartModel>(context)
+                          // 默认自己也要刷新
+                          // ChangeNotifierProvider.of<CartModel>(context)?.addGoods(Goods(20, "张三"));
+                          // 优化后，自己不刷新
+                          ChangeNotifierProvider.of<CartModel>(context,
+                                  refresh: false)
                               ?.addGoods(Goods(20, "张三"));
                         },
                         child: const Text("增加商品"),
@@ -155,11 +162,14 @@ class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
       {required this.data, required this.child, super.key});
 
   //定义一个便捷方法，方便子树中的widget获取共享数据
-  static T? of<T>(BuildContext context) {
+  static T? of<T>(BuildContext context, {bool refresh = true}) {
     // final type = _typeOf<InheritedProvider<T>>();
     print("ChangeNotifierProvider of() context is $context T is $T");
-    final provider =
-        context.dependOnInheritedWidgetOfExactType<InheritedProvider<T>>();
+    final provider = refresh
+        ? context.dependOnInheritedWidgetOfExactType<InheritedProvider<T>>()
+        : context
+            .getElementForInheritedWidgetOfExactType<InheritedProvider<T>>()
+            ?.widget as InheritedProvider<T>;
     print("ChangeNotifierProvider of() 获取到的provider: $provider");
     return provider?.data;
   }
@@ -211,6 +221,21 @@ class _ChangeNotifierProviderState<T extends ChangeNotifier>
       data: widget.data,
       child: widget.child,
     );
+  }
+}
+
+/// 所有需要使用共享数据的，直接用这个类包裹以下，
+/// 1. 目的更明确
+/// 2. 避免每次都ChangeNotifierProvider.of(context),模板代码
+class Consumer<T> extends StatelessWidget {
+  final Widget Function(BuildContext context, T? t) builder;
+
+  const Consumer({super.key, required this.builder});
+
+  @override
+  Widget build(BuildContext context) {
+    var of = ChangeNotifierProvider.of<T>(context);
+    return builder(context, of);
   }
 }
 
