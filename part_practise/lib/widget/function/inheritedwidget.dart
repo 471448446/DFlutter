@@ -50,7 +50,12 @@ class _SharedWidget extends InheritedWidget {
     required this.data,
     required Widget child,
   }) : super(key: key, child: child);
-  final int data; //需要在子树中共享的数据，保存点击次数
+
+  // _SharedWidget(
+  //     {required this.data, required super.child});
+
+  // 需要在子树中共享的数据，保存点击次数
+  final int data;
 
   //定义一个便捷方法，方便子树中的widget获取共享数据
   static _SharedWidget? of(BuildContext context) {

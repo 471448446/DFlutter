@@ -7,28 +7,49 @@ class LikeProviderRoutePage extends SimplePageRoute {
   LikeProviderRoutePage({super.key}) : super('模拟Provider');
 
   @override
-  Widget pageBody(BuildContext context) => Center(
+  Widget pageBody(BuildContext context) =>
+      Center(
         child: ChangeNotifierProvider<CartModel>(
             data: CartModel(),
-            child: Column(
-              children: [
-                Builder(builder: (context) {
-                  return Text(
-                      "总价:${ChangeNotifierProvider.of(context)?.allPrice}");
-                }),
-                Builder(builder: (context) {
-                  print("ElevatedButton build");
-                  return ElevatedButton(
-                    onPressed: () {
-                      ChangeNotifierProvider.of(context)
-                          ?.addGoods(Goods(20, "张三"));
-                    },
-                    child: const Text("增加商品"),
-                  );
-                })
-              ],
-            )),
+            child: Builder(builder: (context) {
+              print("Column use Builder context is $context");
+              return Column(
+                children: [
+                  Builder(builder: (context) {
+                    print("Column children Text use Builder context is $context");
+                    return Text(
+                        "总价:${ChangeNotifierProvider
+                            .of(context)
+                            ?.allPrice}");
+                  }),
+                  Text(
+                      "总价:${ChangeNotifierProvider.of(context)?.allPrice}"),
+                  TextTestWidget(),
+                  Builder(builder: (context) {
+                    print(
+                        "Column children ElevatedButton build context is $context");
+                    return ElevatedButton(
+                      onPressed: () {
+                        print(
+                            "Column children ElevatedButton click Builder context is $context");
+                        ChangeNotifierProvider.of(context)
+                            ?.addGoods(Goods(20, "张三"));
+                      },
+                      child: const Text("增加商品"),
+                    );
+                  })
+                ],
+              );
+            },)),
       );
+}
+class TextTestWidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    print("TextTest context is $context");
+    return Text(
+        "总价:${ChangeNotifierProvider.of(context)?.allPrice}");
+  }
 }
 //
 // class _Pages extends StatefulWidget {
@@ -101,7 +122,7 @@ class CartModel extends ChangeNotifier {
 class InheritedProvider<T> extends InheritedWidget {
   final T data;
 
-  InheritedProvider({required this.data, required super.child});
+  InheritedProvider({super.key, required this.data, required super.child});
 
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) {
@@ -123,9 +144,10 @@ class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
   //定义一个便捷方法，方便子树中的widget获取共享数据
   static T? of<T>(BuildContext context) {
     // final type = _typeOf<InheritedProvider<T>>();
+    print("ChangeNotifierProvider of() context is $context");
     final provider =
-        context.dependOnInheritedWidgetOfExactType<InheritedProvider<T>>();
-    print("获取到的provider: $provider");
+    context.dependOnInheritedWidgetOfExactType<InheritedProvider<T>>();
+    print("ChangeNotifierProvider of() 获取到的provider: $provider");
     return provider?.data;
   }
 
