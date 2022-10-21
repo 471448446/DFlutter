@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:part_practise/animation/animation_main.dart';
 import 'package:part_practise/exception/exception_main.dart';
 import 'package:part_practise/motionevent/motionevent_main.dart';
 import 'package:part_practise/navigator/navigator_for_result_page.dart';
@@ -113,6 +114,7 @@ class MyHomePage extends StatelessWidget {
               ScrollDemoWidget(),
               FunctionDemoWidget(),
               MotionEventDemoWidget(),
+              AnimationDemoWidget(),
             ],
           ),
         ),
