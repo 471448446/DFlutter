@@ -23,10 +23,10 @@ class AnimationRoutePage extends SimplePageRoute {
         ],
       );
 }
-class _PagesTest extends StatefulWidget{
-
-}
-class _PagesTestState extends State<>
+// class _PagesTest extends StatefulWidget{
+//
+// }
+// class _PagesTestState extends State<>
 
 /// 方式三
 /// 缩小了刷新范围，只刷新AnimationBuilder里面的一部分
