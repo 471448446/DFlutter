@@ -8,14 +8,39 @@ class AnimationDemoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(children: [
-    const TextTitleWidget("滑动事件和通知"),
-    Wrap(
-        spacing: 1.0, // 主轴(水平)方向间距
-        runSpacing: 1.0, // 纵轴（垂直）方向间距
-        alignment: WrapAlignment.start, //沿主轴方向居中
-        children: [
-          TextEntranceWidget.createEntranceAndWait(
-              context, "动画", AnimationRoutePage()),
-        ])
-  ]);
+        const TextTitleWidget("动画"),
+        Wrap(
+            spacing: 1.0, // 主轴(水平)方向间距
+            runSpacing: 1.0, // 纵轴（垂直）方向间距
+            alignment: WrapAlignment.start, //沿主轴方向居中
+            children: [
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "动画", AnimationRoutePage()),
+              //https://book.flutterchina.club/chapter9/route_transition.html
+              TextEntranceWidget.createEntrance(context, "页面切换动画", () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => AnimationRoutePage(),
+                    ));
+              }),
+              TextEntranceWidget.createEntrance(context, "页面切换动画", () {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        transitionDuration: const Duration(milliseconds: 1000),
+                        //动画时间为500毫秒,
+                        pageBuilder: (BuildContext context,
+                                Animation<double> animation,
+                                Animation secondaryAnimation) =>
+                            FadeTransition(
+                              //使用渐隐渐入过渡,
+                              opacity: animation,
+                              child: AnimationRoutePage(), //路由B
+                            )));
+              }),
+
+              ///todo 更多
+            ])
+      ]);
 }
