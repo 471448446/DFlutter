@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:part_practise/file/http_hell0.dart';
 import 'package:part_practise/utils/ui.dart';
 
 import 'file_hello.dart';
@@ -17,6 +18,10 @@ class FileHandleDemoWidget extends StatelessWidget {
             children: [
               TextEntranceWidget.createEntranceAndWait(
                   context, "文件操作", FileHelloRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "网络请求", HttpHelloRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "JSON格式转换", HttpHelloRoutePage()),
 
               ///todo 更多
             ])

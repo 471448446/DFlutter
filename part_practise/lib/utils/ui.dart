@@ -65,14 +65,17 @@ abstract class SimplePageRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     this.context = context;
-    return MaterialApp(
-      title: pageTitle,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(pageTitle),
-        ),
-        body: pageBody(context),
+    return
+        // 这里不需要在嵌套一层，AppBar会自带带返回图标
+        // MaterialApp(
+        // title: pageTitle,
+        // home:
+        Scaffold(
+      appBar: AppBar(
+        title: Text(pageTitle),
       ),
+      body: pageBody(context),
+      // ),
     );
   }
 

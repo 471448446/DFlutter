@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:part_practise/animation/AnimationTest.dart';
+import 'package:part_practise/animation/combine_animation.dart';
+import 'package:part_practise/animation/hero.dart';
 import 'package:part_practise/utils/ui.dart';
 
 /// 动画
@@ -16,6 +18,7 @@ class AnimationDemoWidget extends StatelessWidget {
             children: [
               TextEntranceWidget.createEntranceAndWait(
                   context, "动画", AnimationRoutePage()),
+
               //https://book.flutterchina.club/chapter9/route_transition.html
               TextEntranceWidget.createEntrance(context, "页面切换动画", () {
                 Navigator.push(
@@ -39,6 +42,10 @@ class AnimationDemoWidget extends StatelessWidget {
                               child: AnimationRoutePage(), //路由B
                             )));
               }),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "Hero动画", HeroDemoRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "组合多个动画", CombineAnimationRoutePage()),
 
               ///todo 更多
             ])
