@@ -13,6 +13,7 @@ import 'package:part_practise/res/res_main.dart';
 import 'package:part_practise/state/state_manage_mix.dart';
 import 'package:part_practise/state/state_manage_parent.dart';
 import 'package:part_practise/state/state_manage_self.dart';
+import 'package:part_practise/up/up.main.dart';
 import 'package:part_practise/utils/ui.dart';
 import 'package:part_practise/widget/container_main.dart';
 import 'package:part_practise/widget/function_main.dart';
@@ -119,6 +120,7 @@ class MyHomePage extends StatelessWidget {
               AnimationDemoWidget(),
               CustomDefineWidgetDemoWidget(),
               FileHandleDemoWidget(),
+              UpMoreDemoWidget(),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:part_practise/animation/AnimationSwitcherRoutePage.dart';
 import 'package:part_practise/animation/AnimationTest.dart';
 import 'package:part_practise/animation/combine_animation.dart';
 import 'package:part_practise/animation/hero.dart';
@@ -46,6 +47,8 @@ class AnimationDemoWidget extends StatelessWidget {
                   context, "Hero动画", HeroDemoRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "组合多个动画", CombineAnimationRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "AnimationSwitcher", AnimationSwitcherRoutePages()),
 
               ///todo 更多
             ])
