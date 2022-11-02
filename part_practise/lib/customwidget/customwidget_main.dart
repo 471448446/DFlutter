@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:part_practise/customwidget/way1_from_combine.dart';
+import 'package:part_practise/customwidget/way1_from_combine2.dart';
 import 'package:part_practise/utils/ui.dart';
 
 /// 自定义组件
@@ -16,6 +17,9 @@ class CustomDefineWidgetDemoWidget extends StatelessWidget {
             children: [
               TextEntranceWidget.createEntranceAndWait(
                   context, "组合", CustomWidgetRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "组合2", CustomWidgetFromCombineRoutePage()),
+
               ///todo 更多
             ])
       ]);
