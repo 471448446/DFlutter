@@ -3,6 +3,7 @@ import 'package:part_practise/animation/AnimationSwitcherRoutePage.dart';
 import 'package:part_practise/animation/AnimationTest.dart';
 import 'package:part_practise/animation/combine_animation.dart';
 import 'package:part_practise/animation/hero.dart';
+import 'package:part_practise/animation/transit_animation.dart';
 import 'package:part_practise/utils/ui.dart';
 
 /// 动画
@@ -49,6 +50,8 @@ class AnimationDemoWidget extends StatelessWidget {
                   context, "组合多个动画", CombineAnimationRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "AnimationSwitcher", AnimationSwitcherRoutePages()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "过渡动画", TransitTestRoutePage()),
 
               ///todo 更多
             ])
