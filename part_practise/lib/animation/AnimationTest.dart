@@ -1,25 +1,18 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:part_practise/utils/ui.dart';
 
 class AnimationRoutePage extends SimplePageRoute {
   AnimationRoutePage({super.key}) : super('动画演示');
 
   @override
-  Widget pageBody(BuildContext context) => Stack(
+  Widget pageBody(BuildContext context) => Column(
         children: [
-          Positioned(
-            top: 0,
-            child: _Pages(),
-          ),
-          Positioned(
-            top: 220,
-            child: _Pages2(),
-          ),
-          Positioned(
-            top: 440,
-            child: _Pages3(),
-          )
+          const Text('动画实现方式一，四个基本组件，Provider、AnimationController、Curve、Tween'),
+          _Pages(),
+          const Text('动画实现方式二，使用AnimatedWidget'),
+          _Pages2(),
+          const Text('动画实现方式三，使用AnimatedBuilder'),
+          _Pages3()
         ],
       );
 }
