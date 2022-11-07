@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:part_practise/file/JsonConvertRoutePage.dart';
 import 'package:part_practise/file/http_hell0.dart';
 import 'package:part_practise/utils/ui.dart';
 
@@ -21,7 +22,7 @@ class FileHandleDemoWidget extends StatelessWidget {
               TextEntranceWidget.createEntranceAndWait(
                   context, "网络请求", HttpHelloRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
-                  context, "JSON格式转换", HttpHelloRoutePage()),
+                  context, "JSON格式转换", JsonConvertRoutePage()),
 
               ///todo 更多
             ])
