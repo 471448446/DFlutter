@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:part_practise/generated/l10n.dart';
 import 'package:part_practise/utils/ui.dart';
 
 class CustomSingleWidgetRoutePage extends SimplePageRoute {
   CustomSingleWidgetRoutePage({super.key}) : super('单个child自定义');
 
   @override
-  Widget pageBody(BuildContext context) => const CustomCenter(
-        child: Text('单个child自定义'),
+  Widget pageBody(BuildContext context) => CustomCenter(
+        child: Text("单个child自定义 ${S.of(context).description}"),
       );
 }
 

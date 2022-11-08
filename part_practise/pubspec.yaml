@@ -31,6 +31,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #  国际化
+  flutter_localizations:
+    sdk: flutter
   #https://pub.flutter-io.cn/packages/fluttertoast
   #自带的只有snackbar提示
   fluttertoast: ^8.0.9
@@ -47,6 +50,8 @@ dependencies:
   # json序列化
   json_serializable: ^6.5.4
   build_runner: ^2.3.2
+  #  国际化2，使用intl包辅助
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -58,12 +63,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  #  国际化2，使用intl包辅助
+  intl_generator: 0.3.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  #  flutter 自带的arb功能
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -101,3 +109,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

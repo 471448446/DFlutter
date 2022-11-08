@@ -1,11 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:part_practise/animation/animation_main.dart';
 import 'package:part_practise/customwidget/customwidget_main.dart';
 import 'package:part_practise/exception/exception_main.dart';
 import 'package:part_practise/file/file_main.dart';
+import 'package:part_practise/generated/l10n.dart';
+import 'package:part_practise/i18/AppLocalizationsDelegate.dart';
+import 'package:part_practise/i18/i18_main.dart';
+import 'package:part_practise/l10n2/l10n.dart';
 import 'package:part_practise/motionevent/motionevent_main.dart';
 import 'package:part_practise/navigator/navigator_for_result_page.dart';
 import 'package:part_practise/navigator/navigator_named_routine.dart';
@@ -64,6 +69,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        // 本地化的代理类
+        GlobalMaterialLocalizations.delegate,
+        // GlobalMaterialLocalizations:为Material 组件库提供的本地化的字符串和其他值，它可以使Material 组件支持多语言
+        GlobalWidgetsLocalizations.delegate,
+        // GlobalWidgetsLocalizations:定义组件默认的文本方向，从左到右或从右到左，这是因为有些语言的阅读习惯并不是从左到右，比如如阿拉伯语就是从右向左的。
+        // 第一种方式，完全自己写
+        AppLocalizationsCustomDirectDelegate(),
+        /// 上面时自己完全自定义时的写法，实际情况，2、3种方式，只需要写一个就行
+        // 第二种方式使用intl，自动生成的
+        S.delegate,
+        // 第三种方式，系统默认自带功能
+        MyAppLocalizations.delegate,
+      ],
+      // supportedLocales: const [
+      //   //supportedLocales: 也接收一个Locale数组，表示我们的应用支持的语言列表，在本例中我们的应用只支持美国英语和中文简体两种语言
+      //   // 美国英语
+      //   Locale('en', 'US'),
+      //   // 中文简体
+      //   Locale('zh', 'CN'),
+      // ],
+      // supportedLocales: S.delegate.supportedLocales,
+      supportedLocales: MyAppLocalizations.supportedLocales,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -78,7 +106,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(title: const Text("Hello")),
+        appBar: AppBar(title: Builder(builder: (context) {
+          return Text(
+              "Hello ${AppLocalizationsCustomDirect.of(context).title} ${S.of(context).title}");
+        })),
         body: MyHomePage(),
       ),
     );
@@ -121,6 +152,7 @@ class MyHomePage extends StatelessWidget {
               CustomDefineWidgetDemoWidget(),
               FileHandleDemoWidget(),
               UpMoreDemoWidget(),
+              I18DemoWidget(),
             ],
           ),
         ),

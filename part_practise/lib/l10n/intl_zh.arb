@@ -1,0 +1,22 @@
+{
+  "title": "您好，世界",
+  "description": "标题2",
+  "askChoice": "这里有两个选择:{one}?或是 {two}",
+  "@askChoice": {
+    "description": "给某人两个选择，然后等待他的选择",
+    "placeHolder": {
+      "one": {},
+      "two": {}
+    }
+  },
+  "customDateFormat": "当前日期: {date}",
+  "@customDateFormat": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "EEE, MM/dd/yyyy",
+        "isCustomDateFormat": "true"
+      }
+    }
+  }
+}
