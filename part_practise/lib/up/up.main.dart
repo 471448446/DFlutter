@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:part_practise/up/layout/CustomCenter.dart';
+import 'package:part_practise/up/orientation/OrientationRotePage.dart';
+import 'package:part_practise/up/orientation/OrientationSetRoutePage.dart';
 import 'package:part_practise/utils/ui.dart';
 
 /// 更多原理
@@ -16,6 +18,10 @@ class UpMoreDemoWidget extends StatelessWidget {
             children: [
               TextEntranceWidget.createEntranceAndWait(
                   context, "单个节点布局", CustomSingleWidgetRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "屏幕旋转", OrientationRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "强制横屏", OrientationSetRoutePage()),
             ])
       ]);
 }

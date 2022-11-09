@@ -4,6 +4,7 @@ import 'package:part_practise/widget/layout/align.dart';
 import 'package:part_practise/widget/layout/constranedbox_min.dart';
 import 'package:part_practise/widget/layout/flexlayout.dart';
 import 'package:part_practise/widget/layout/flowlayout.dart';
+import 'package:part_practise/widget/layout/layout_demo.dart';
 import 'package:part_practise/widget/layout/layoutbuilder.dart';
 import 'package:part_practise/widget/layout/linear_nest_colum_fix.dart';
 import 'package:part_practise/widget/layout/linear_nest_row.dart';
@@ -49,6 +50,8 @@ class LayoutDemoWidget extends StatelessWidget {
                   context, "对齐布局Align", AlignLayoutRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "LayoutBuilder", LayoutBuilderRoute()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "布局Demo", LayoutDemoRoutePage()),
             ])
       ]);
 }
