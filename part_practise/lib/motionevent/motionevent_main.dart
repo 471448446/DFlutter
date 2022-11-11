@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:part_practise/motionevent/gesturedetector_click.dart';
+import 'package:part_practise/motionevent/gesturedetector_nest.dart';
 import 'package:part_practise/motionevent/gesturedetector_scale.dart';
 import 'package:part_practise/motionevent/gesturedetector_scroll.dart';
 import 'package:part_practise/motionevent/listener_pointer.dart';
@@ -25,6 +26,8 @@ class MotionEventDemoWidget extends StatelessWidget {
                   context, " 触摸事件", PrintOffsetRoutePage()),
               TextEntranceWidget.createEntranceAndWait(context,
                   "GestureDetector点击", GestureDetectorClickRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "GestureDetector嵌套", GestureDetectorNestRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "GestureDetector滑动", GestureDetectorMoveRoutePage()),
               TextEntranceWidget.createEntranceAndWait(context,

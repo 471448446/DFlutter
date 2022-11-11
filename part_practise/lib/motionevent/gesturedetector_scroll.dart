@@ -16,8 +16,8 @@ class _Page extends StatefulWidget {
 }
 
 class _PageState extends State<_Page> {
-  double _top = 0.0; //距顶部的偏移
-  double _left = 0.0; //距左边的偏移
+  double _top = 20.0; //距顶部的偏移
+  double _left = 20.0; //距左边的偏移
   @override
   Widget build(BuildContext context) => Stack(
         children: <Widget>[
@@ -43,9 +43,10 @@ class _PageState extends State<_Page> {
                 //打印滑动结束时在x、y轴上的速度
                 print("用户手指抬起：e.velocity");
               },
-              onVerticalDragUpdate: (DragUpdateDetails e){
-
-              },
+              // 设置了竖直滑动，会拦截onPanUpdate的竖直滑动
+              // onVerticalDragUpdate: (DragUpdateDetails e){
+              //
+              // },
             ),
           )
         ],
