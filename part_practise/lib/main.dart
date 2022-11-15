@@ -77,6 +77,7 @@ class MyApp extends StatelessWidget {
         // GlobalWidgetsLocalizations:定义组件默认的文本方向，从左到右或从右到左，这是因为有些语言的阅读习惯并不是从左到右，比如如阿拉伯语就是从右向左的。
         // 第一种方式，完全自己写
         AppLocalizationsCustomDirectDelegate(),
+
         /// 上面时自己完全自定义时的写法，实际情况，2、3种方式，只需要写一个就行
         // 第二种方式使用intl，自动生成的
         S.delegate,
@@ -125,6 +126,9 @@ class MyHomePage extends StatelessWidget {
     // 打开APP时，直接滚动到底部
     //https://stackoverflow.com/questions/61437549/flutter-how-to-automaticallly-scroll-to-end-of-singlechildscrollview
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      // if (_scrollController.hasClients) {
+      //
+      // }
       _scrollController.animateTo(_scrollController.position.maxScrollExtent,
           duration: const Duration(seconds: 2), curve: Curves.ease);
     });
@@ -134,7 +138,8 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) => WillPopScope(
       child: Scrollbar(
         child: SingleChildScrollView(
-          controller: _scrollController,
+          // ios上这里抛出异常 The Scrollbar's ScrollController has no ScrollPosition attached.
+        controller: _scrollController,
           // 滑动展示显示不完的数据
           child: Column(
             children: const [
