@@ -23,6 +23,7 @@ samples, guidance on mobile development, and a full API reference.
 [构建和发布为 Android 应用](https://flutter.cn/docs/deployment/android)
 ```bash
 flutter build apk
+flutter build apk --no-sound-null-safety
 ```
 该命令会打包AndroidAPk文件，会自带`--release`参数
 ```bash
