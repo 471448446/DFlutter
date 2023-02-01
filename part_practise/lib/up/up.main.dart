@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:part_practise/up/future/future_cancel_pages.dart';
+import 'package:part_practise/up/future/future_completer.dart';
 import 'package:part_practise/up/layout/CustomCenter.dart';
 import 'package:part_practise/up/orientation/OrientationRotePage.dart';
 import 'package:part_practise/up/orientation/OrientationSetRoutePage.dart';
@@ -22,6 +24,10 @@ class UpMoreDemoWidget extends StatelessWidget {
                   context, "屏幕旋转", OrientationRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "强制横屏", OrientationSetRoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "FutureCancel", FutureCancelPages()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "FutureCompleter", FutureCompleterPage()),
             ])
       ]);
 }
