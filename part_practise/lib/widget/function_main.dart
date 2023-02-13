@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:part_practise/utils/ui.dart';
 import 'package:part_practise/widget/function/alert_dialog.dart';
 import 'package:part_practise/widget/function/future_builder.dart';
+import 'package:part_practise/widget/function/future_create.dart';
 import 'package:part_practise/widget/function/inheritedwidget.dart';
 import 'package:part_practise/widget/function/like_provider.dart';
 import 'package:part_practise/widget/function/value_listenable.dart';
@@ -29,6 +30,8 @@ class FunctionDemoWidget extends StatelessWidget {
                   context, "ValueListenable", ValueListenableRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "ValueListenable2", ValueListenable2RoutePage()),
+              TextEntranceWidget.createEntranceAndWait(
+                  context, "Future创建", FutureCreateRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
                   context, "异步刷新FutureBuilder", FutureBuilderRoutePage()),
               TextEntranceWidget.createEntranceAndWait(
