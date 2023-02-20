@@ -23,6 +23,7 @@ import 'package:part_practise/up/up.main.dart';
 import 'package:part_practise/utils/ui.dart';
 import 'package:part_practise/widget/container_main.dart';
 import 'package:part_practise/widget/function_main.dart';
+import 'package:part_practise/widget/future/future_main.dart';
 import 'package:part_practise/widget/layout_main.dart';
 import 'package:part_practise/widget/scroll_main.dart';
 import 'package:part_practise/widget/widget_main.dart';
@@ -179,6 +180,7 @@ class MyHomePage extends StatelessWidget {
               FileHandleDemoWidget(),
               UpMoreDemoWidget(),
               I18DemoWidget(),
+              FutureWidget(),
             ],
           ),
         ),
